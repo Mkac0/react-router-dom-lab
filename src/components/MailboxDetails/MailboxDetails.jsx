@@ -14,6 +14,12 @@ const MailboxDetails = (props) => {
     return (
         <>
             <h2>{selectedBox.name}</h2>
+            <dl>
+                <dt>Box Size:</dt>
+                    <dd>{singleMailbox.boxSize}</dd>
+                <dt>Box Owner</dt>
+                    <dd>{singleMailbox.boxOwner}</dd>
+            </dl>
         </>
     )
 }
