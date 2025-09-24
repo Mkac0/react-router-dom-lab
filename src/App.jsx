@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
 import { Route, Routes } from 'react-router';
 import MailboxDetails from './components/MailboxDetails/MailboxDetails';
 import MailboxForm from './components/MailboxForm/MailboxForm';
+import MailboxList from './components/MailboxList/MailboxList';
 
 const App = () => {
   const [mailboxes, setMailboxes] = useState([]);
@@ -22,7 +21,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path='/' element={<main><h1>Post Office</h1></main>} />
-        <Route path='/mailboxes' element={<h2>Mailboxes</h2>} />
+        <Route path='/mailboxes' element={<MailboxList mailboxes={mailboxes} />} />
         <Route 
           path='mailboxes/new-mailbox' 
           element={<MailboxForm addBox={addBox} />} 

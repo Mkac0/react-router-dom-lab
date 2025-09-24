@@ -1,27 +1,23 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 
-const MailboxDetails = (props) => {
-    console.log(props);
+const MailboxDetails = ({ mailboxes }) => {
+    console.log(mailboxes);
 
     const { mailboxId } = useParams();
-    console.log('mailboxId:', mailboxId);
-
-    const selectedBox = props.mailboxes.find((mailbox) => (
-        mailbox._id === Number(mailboxId)
-    ));
-    console.log('Mailbox Selection', selectedBox);
+    const id = Number(mailboxId);
+    const mailbox = mailboxes.find(mailbox => mailbox._id === id);
 
     return (
         <>
-            <h2>{selectedBox.name}</h2>
-            <dl>
-                <dt>Box Size: </dt>
-                    <dd>{singleMailbox.boxSize}</dd>
-                <dt>Box Owner: </dt>
-                    <dd>{singleMailbox.boxOwner}</dd>
-            </dl>
+            <h2>Mailbox Details</h2>
+            <ul>
+                <li>Box Number: {mailbox._id}</li>
+                <li>Box Owner: {mailbox.boxOwner}</li>
+                <li>Box Size: {mailbox.boxSize}</li>
+            </ul>
+            <p><Link to='/mailboxes'>Back to Mailboxes</Link></p>
         </>
-    )
+    );
 }
 
 export default MailboxDetails;
