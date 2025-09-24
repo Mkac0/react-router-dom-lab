@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router';
 
-const initialState = {
-    boxSize: 0,
-    boxOwner: '',
-}
+const MailboxForm = ({ addBox }) => {
+    const initialState = {
+        boxSize: 'Small',
+        boxOwner: '',
+    }
 
-const MailboxForm = (props) => {
     const [formData, setFormData] = useState(initialState);
 
     const navigate = useNavigate();
@@ -17,23 +17,27 @@ const MailboxForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.addMailbox(formData);
-        setFormData();
+        addBox(formData);
+        setFormData(initialState);
         navigate('/mailboxes');
     }
 
     return (
-        <main onSubmit={handleSubmit}>
-            <h2>New-Mailbox</h2>
-            <form>
+        <main>
+            <h2>New Mailbox</h2>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="boxSize"> Box Size</label>
-                <input
+                <select
                     id="boxSize"
                     name="boxSize"
                     value={formData.boxSize}
                     onChange={handleChange}
                     required
-                />
+                >
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                </select>
 
                 <label htmlFor="boxOwner"> Box Owner</label>
                 <input
@@ -45,7 +49,7 @@ const MailboxForm = (props) => {
                 />
 
                 <button type="submit">
-                    {props.selected ? 'Update Mailbox' : 'Add New Mailbox'}
+                    Create Mailbox
                 </button>
             </form>
         </main>

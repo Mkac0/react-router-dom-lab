@@ -8,12 +8,14 @@ import MailboxDetails from './components/MailboxDetails/MailboxDetails';
 import MailboxForm from './components/MailboxForm/MailboxForm';
 
 const App = () => {
-  const [mailbox, setMailbox] = useState();
+  const [mailboxes, setMailboxes] = useState([]);
 
-  const addMailbox = (newMailboxData) => {
-    newMailboxData._id = mailbox.length + 1;
-    setMailbox([...mailbox, newMailboxData]);
-  }
+  const addBox = ({ boxOwner, boxSize }) => {
+    setMailboxes(prev => [
+      ...prev,
+      { _id: prev.length + 1, boxOwner, boxSize }
+    ]);
+  };
 
   return (
     <>
@@ -23,11 +25,11 @@ const App = () => {
         <Route path='/mailboxes' element={<h2>Mailboxes</h2>} />
         <Route 
           path='mailboxes/new-mailbox' 
-          element={<MailboxForm addMailbox={addMailbox} />} 
+          element={<MailboxForm addBox={addBox} />} 
         />
         <Route
-          path='/mailboxes/::mailboxId'
-          element={<MailboxDetails mailbox={mailbox} />}  
+          path='/mailboxes/:mailboxId'
+          element={<MailboxDetails mailboxes={mailboxes} />}  
         />
       </Routes>
     </>
